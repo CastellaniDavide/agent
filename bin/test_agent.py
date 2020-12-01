@@ -24,7 +24,7 @@ def test():
 	assert agent(parts=["netinfo", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
 	assert agent(parts=["eventsview", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
 	assert agent(parts=["product", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
-	assert agent(vs=True) == None, "test failed (personal_code: 0)" # check all code
+	assert agent(vs=True) != 1, "test failed (personal_code: 0)" # check all code
 
 	#assert agent.<function>(<values>) == <the result(s) you would like to have>, "<the fail message>"
 	
