@@ -95,7 +95,7 @@ class agent:
 					elif i == "eventsview":
 						self.print("\t\t- Istruction: Win32_NTLogEvent")
 						for events_view in conn.Win32_NTLogEvent(['ComputerName ', 'User', 'Category', 'Type', 'CategoryString', 'EventCode', 'EventIdentifier', 'EventType', 'Logfile', 'RecordNumber'], type="Error"):
-							data = f"'{'My PC' if self.debug else PC_name}','{events_view.User}','{events_view.Category}','{events_view.Type}','{events_view.CategoryString}','{events_view.EventCode}','{events_view.EventIdentifier}','{events_view.EventType}','{events_view.Logfile}','{events_view.RecordNumber}','{start_time}','{start_time.timestamp()}'\n"
+							data = f"'{'My PC' if self.debug else PC_name}','{events_view.User}','{events_view.Category}','{events_view.Type}','{events_view.CategoryString}','{events_view.EventCode}','{events_view.EventIdentifier}','{events_view.EventType}','{events_view.Logfile}','{events_view.RecordNumber}','{self.start_time}','{self.start_time.timestamp()}'\n"
 							self.csv_agent["eventsview"].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
 							self.csv_agent_history["eventsview"].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
 		
