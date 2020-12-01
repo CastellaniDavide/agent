@@ -21,6 +21,7 @@ class agent:
 		self.debug = debug
 		self.vs = vs
 		self.parts = parts
+		while (None in self.parts): self.parts.remove(None)
 
 		self.base_dir = "." if self.vs else ".." # the project "root" in Visual studio it is different
 
