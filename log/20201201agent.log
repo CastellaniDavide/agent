@@ -703,3 +703,18 @@ Unchecked PC updated
 End time: 2020-12-01 11:18:55.225009
 Total time: 0:02:32.355766
 
+Start time: 2020-12-01 12:04:26.623976
+Opened all files
+Running: agent.py
+- Inizialize files
+	- Inizialized csv_unchecked2
+	- Inizialize osversion file
+	- Inizialized osversion history file
+	- Inizialized osversion file
+- Run core
+	- localhost
+		- Istructions: Win32_OperatingSystem
+Unchecked PC updated
+End time: 2020-12-01 12:04:36.022560
+Total time: 0:00:09.398584
+

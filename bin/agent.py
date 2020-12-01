@@ -84,10 +84,13 @@ class agent:
 						self.MACsep = '-'
 						self.print("\t\t- Istructions: Win32_NetworkClient && Win32_NetworkProtocol")
 						for network_client, network_protocol, other in zip(conn.Win32_NetworkClient(["Caption", "Description", "Status", "Manufacturer", "Name"]), conn.Win32_NetworkProtocol(["GuaranteesDelivery", "GuaranteesSequencing", "MaximumAddressSize", "MaximumMessageSize", "SupportsConnectData", "SupportsEncryption", "SupportsEncryption", "SupportsGracefulClosing", "SupportsGuaranteedBandwidth", "SupportsQualityofService"]), conn.Win32_NetworkAdapterConfiguration(["DNSDomain", "DHCPEnabled", "DefaultIPGateway", "MACAddress"], IPEnabled=True)):
-							for i in range(len(other.DefaultIPGateway)):
-								data = f"""'{'My PC' if self.debug else PC_name}','{network_client.Caption}','{network_client.Description}','{network_client.Status}','{network_client.Manufacturer}','{network_client.Name}','{network_protocol.GuaranteesDelivery}','{network_protocol.GuaranteesSequencing}','{network_protocol.MaximumAddressSize}','{network_protocol.MaximumMessageSize}','{network_protocol.SupportsConnectData}','{network_protocol.SupportsEncryption}','{network_protocol.SupportsGracefulClosing}','{network_protocol.SupportsGuaranteedBandwidth}','{network_protocol.SupportsQualityofService}','{other.DNSDomain}','{other.DHCPEnabled}','{"IPv4" if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else "IPv6"}','{other.DefaultIPGateway[i] if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else self.MACnormalization(other.DefaultIPGateway[i])}','{self.MACnormalization(other.MACAddress)}','{requests.get(f"http://macvendors.co/api/{other.MACAddress}").json()['result']['company']}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n"""
-								self.csv_agent["netinfo"].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
-								self.csv_agent_history["netinfo"].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
+							try:
+								for i in range(len(other.DefaultIPGateway)):
+									data = f"""'{'My PC' if self.debug else PC_name}','{network_client.Caption}','{network_client.Description}','{network_client.Status}','{network_client.Manufacturer}','{network_client.Name}','{network_protocol.GuaranteesDelivery}','{network_protocol.GuaranteesSequencing}','{network_protocol.MaximumAddressSize}','{network_protocol.MaximumMessageSize}','{network_protocol.SupportsConnectData}','{network_protocol.SupportsEncryption}','{network_protocol.SupportsGracefulClosing}','{network_protocol.SupportsGuaranteedBandwidth}','{network_protocol.SupportsQualityofService}','{other.DNSDomain}','{other.DHCPEnabled}','{"IPv4" if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else "IPv6"}','{other.DefaultIPGateway[i] if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else self.MACnormalization(other.DefaultIPGateway[i])}','{self.MACnormalization(other.MACAddress)}','{requests.get(f"http://macvendors.co/api/{other.MACAddress}").json()['result']['company']}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n"""
+									self.csv_agent["netinfo"].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
+									self.csv_agent_history["netinfo"].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
+							except:
+								pass
 
 					elif i == "eventsview":
 						self.print("\t\t- Istruction: Win32_NTLogEvent")
