@@ -20,11 +20,11 @@ def test():
 	
 	assert agent.array2csv([["test","test"], ["example value","example value 2"], ["example value","example value 2"], ["example value","example value 2"]]) == '"test","test"\n"example value","example value 2"\n"example value","example value 2"\n"example value","example value 2"\n', "Array2CSV fails (personal_code: 3b)"
 
-	assert agent(parts=["osversion", ], vs=True), "test failed (personal_code: 0)" # check all code
-	assert agent(parts=["netinfo", ], vs=True), "test failed (personal_code: 0)" # check all code
-	assert agent(parts=["eventsview", ], vs=True), "test failed (personal_code: 0)" # check all code
-	assert agent(parts=["product", ], vs=True), "test failed (personal_code: 0)" # check all code
-	assert agent(vs=True), "test failed (personal_code: 0)" # check all code
+	assert agent(parts=["osversion", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
+	assert agent(parts=["netinfo", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
+	assert agent(parts=["eventsview", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
+	assert agent(parts=["product", ], vs=True) != 1, "test failed (personal_code: 0)" # check all code
+	assert agent(vs=True) == None, "test failed (personal_code: 0)" # check all code
 
 	#assert agent.<function>(<values>) == <the result(s) you would like to have>, "<the fail message>"
 	
