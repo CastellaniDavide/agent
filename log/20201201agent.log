@@ -718,3 +718,86 @@ Unchecked PC updated
 End time: 2020-12-01 12:04:36.022560
 Total time: 0:00:09.398584
 
+Start time: 2020-12-01 14:35:08.740851
+Opened all files
+Running: agent.py
+- Inizialize files
+	- Inizialized csv_unchecked2
+	- Inizialize osversion file
+	- Inizialized osversion history file
+	- Inizialized osversion file
+- Run core
+	- localhost
+		- Istructions: Win32_OperatingSystem
+Unchecked PC updated
+End time: 2020-12-01 14:35:18.142017
+Total time: 0:00:09.401166
+
+Start time: 2020-12-01 14:35:18.142017
+Opened all files
+Running: agent.py
+- Inizialize files
+	- Inizialized csv_unchecked2
+	- Inizialize netinfo file
+	- Inizialized netinfo history file
+	- Inizialized netinfo file
+- Run core
+	- localhost
+		- Istructions: Win32_NetworkClient && Win32_NetworkProtocol
+Unchecked PC updated
+End time: 2020-12-01 14:35:28.059304
+Total time: 0:00:09.917287
+
+Start time: 2020-12-01 14:35:28.059304
+Opened all files
+Running: agent.py
+- Inizialize files
+	- Inizialized csv_unchecked2
+	- Inizialize eventsview file
+	- Inizialized eventsview history file
+	- Inizialized eventsview file
+- Run core
+	- localhost
+		- Istruction: Win32_NTLogEvent
+Unchecked PC updated
+End time: 2020-12-01 14:38:10.665304
+Total time: 0:02:42.606000
+
+Start time: 2020-12-01 14:38:10.665304
+Opened all files
+Running: agent.py
+- Inizialize files
+	- Inizialized csv_unchecked2
+	- Inizialize product file
+	- Inizialized product history file
+	- Inizialized product file
+- Run core
+	- localhost
+		- Istruction: Win32_Product
+Unchecked PC updated
+End time: 2020-12-01 14:39:19.890019
+Total time: 0:01:09.224715
+
+Start time: 2020-12-01 14:39:19.890019
+Opened all files
+Running: agent.py
+- Inizialize files
+	- Inizialized csv_unchecked2
+	- Inizialize osversion file
+	- Inizialized osversion file
+	- Inizialize netinfo file
+	- Inizialized netinfo file
+	- Inizialize eventsview file
+	- Inizialized eventsview file
+	- Inizialize product file
+	- Inizialized product file
+- Run core
+	- localhost
+		- Istructions: Win32_OperatingSystem
+		- Istructions: Win32_NetworkClient && Win32_NetworkProtocol
+		- Istruction: Win32_NTLogEvent
+		- Istruction: Win32_Product
+Unchecked PC updated
+End time: 2020-12-01 14:43:23.584171
+Total time: 0:04:03.694152
+
