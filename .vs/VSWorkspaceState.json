@@ -2,13 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\.github",
-    "\\.github\\workflows",
     "\\bin",
     "\\docs",
     "\\flussi",
     "\\log",
     "\\requirements"
   ],
-  "SelectedNode": "\\requirements\\requirements.txt",
+  "SelectedNode": "\\bin\\agent.py",
   "PreviewInSolutionExplorer": false
 }
