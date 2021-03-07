@@ -49,6 +49,10 @@ Create a container of these programs:
  - [Version_01.01_2020-11-30](#Version_10_2020-11-30)
 
 ## Version_01.03_2021-01-14
+ - Changed the method to create logs 
+ - Changed the method to get settings
+
+## Version_01.03_2021-01-14
  - Optimized log
 
 ## Version_01.02_2020-12-12
