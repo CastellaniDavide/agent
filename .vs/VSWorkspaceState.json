@@ -6,7 +6,8 @@
     "\\docs",
     "\\flussi",
     "\\log",
-    "\\requirements"
+    "\\requirements",
+    "\\settings"
   ],
   "SelectedNode": "\\bin\\agent.py",
   "PreviewInSolutionExplorer": false
