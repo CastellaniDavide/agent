@@ -10,7 +10,7 @@ def test():
 	Write here all test you want to do.
 	REMEMBER to test your programm you can't use __init__ function
 	"""
-	assert agent(vs=True) != 1, "test failed (personal_code: 0)" # check all code
+	assert agent() != "", "test failed (personal_code: 0)" # check all code
 	
 if __name__ == "__main__":
 	test()
