@@ -6,7 +6,7 @@ parts:
   validity: true
   intestation: "PC_name,OS,OS_version,Date_local,Date_universal_microsecond"
   db:
-   url: "db url"
+   url: "https://harper db name.harperdbcloud.com"
    token: "your token"
    table: "table name"
    change_intestation:
