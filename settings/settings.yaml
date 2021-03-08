@@ -27,14 +27,29 @@ parts:
    token: "your token"
    table: "table name"
    change_intestation:
-    caption: Caption
-    DHCPServer: DHCPEnabled
+    PC_name: PCname
+    Caption: Caption
+    Description: Description
+    Status: Status
+    Manufacturer: Manufacturer
+    Name: Name
+    GuaranteesDelivery: GuaranteesDelivery
+    GuaranteesSequencing: GuaranteesSequencing
+    MaximumAddressSize: MaximumAddressSize
+    MaximumMessageSize: MaximumMessageSize
+    SupportsConnectData: SupportsConnectData
+    SupportsEncryption: SupportsEncryption
+    SupportsGracefulClosing: SupportsGracefulClosing
+    SupportsGuaranteedBandwidth: SupportsGuaranteedBandwidth
+    SupportsQualityofService: SupportsQualityofService
     DNSDomain: DNSDomain
-    DefaultGW: DefaultIPGateway
-    IPEnabled: PCname
-    IPV4: Description
-    IPV6: Status
-    TimeStamp: Date_universal_microsecond
+    DHCPEnabled: DHCPEnabled
+    IP_Type: IP_Type
+    DefaultIPGateway: DefaultIPGateway
+    MACAddress: MACAddress
+    MACAdress_company: MACAdress_company
+    Date_local: Date_local
+    Date_universal_microsecond: Date_universal_microsecond
    forced_values:
     author: "Castellani Davide"
     module: netinfo
@@ -46,7 +61,18 @@ parts:
    token: "your token"
    table: "table name"
    change_intestation:
-    PC_name: PCname
+    PCname: PCname
+    User: User
+    Category: Category
+    Type: Type
+    CategoryString: CategoryString
+    EventCode: EventCode
+    EventIdentifier: EventIdentifier
+    EventType: EventType
+    Logfile: Logfile
+    RecordNumber: RecordNumber
+    Date_local: Date_local
+    Date_universal_microsecond: Date_universal_microsecond
    forced_values:
     author: "Castellani Davide"
     module: eventsview
@@ -58,7 +84,21 @@ parts:
    token: "your token"
    table: "table name"
    change_intestation:
-    PC_name: PC_name
+    PCname: PC_name
+    Caption: Caption
+    Description: Description
+    IdentifyingNumber: IdentifyingNumber
+    InstallDate: InstallDate
+    InstallLocation: InstallLocation
+    Language: Language
+    Name: Name
+    ProductID: ProductID
+    URLInfoAbout: URLInfoAbout
+    URLUpdateInfo: URLUpdateInfo
+    Vendor: Vendor
+    Version: Version
+    Date_local: Date_local
+    Date_universal_microsecond: Date_universal_microsecond
    forced_values:
     author: "Castellani Davide"
     module: product
