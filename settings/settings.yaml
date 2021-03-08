@@ -1,17 +1,64 @@
 # Settings
-debug: false
+debug: true
 folder: null
 parts:
  osversion: 
   validity: true
-  intestation: "PC_name, OS, OS_version,Date_local,Date_universal_microsecond"
+  intestation: "PC_name,OS,OS_version,Date_local,Date_universal_microsecond"
+  db:
+   url: "your url"
+   token: "your token"
+   table: "table name"
+   change_intestation:
+    PC_name: PC_name
+    OS: OS
+    OS_version: OS_version
+    Date_local: Date_local
+    Date_universal_microsecond: Date_universal_microsecond
+   forced_values:
+    module: osversion
+    author: "Castellani Davide"
  netinfo: 
-  validity: true
+  validity: false
   intestation: "PCname,Caption,Description,Status,Manufacturer,Name,GuaranteesDelivery,GuaranteesSequencing,MaximumAddressSize,MaximumMessageSize,SupportsConnectData,SupportsEncryption,SupportsGracefulClosing,SupportsGuaranteedBandwidth,SupportsQualityofService,DNSDomain,DHCPEnabled,IP_Type,DefaultIPGateway,MACAddress,MACAdress_company,Date_local,Date_universal_microsecond"
   MACsep: "-"
+  db:
+   url: "your url"
+   token: "your token"
+   table: "table name"
+   change_intestation:
+    caption: Caption
+    DHCPServer: DHCPEnabled
+    DNSDomain: DNSDomain
+    DefaultGW: DefaultIPGateway
+    IPEnabled: PCname
+    IPV4: Description
+    IPV6: Status
+    TimeStamp: Date_universal_microsecond
+   forced_values:
+    author: "Castellani Davide"
+    module: netinfo
  eventsview: 
-  validity: true
+  validity: false
   intestation: "PCname,User,Category,Type,CategoryString,EventCode,EventIdentifier,EventType,Logfile,RecordNumber,Date_local,Date_universal_microsecond"
+  db:
+   url: "your url"
+   token: "your token"
+   table: "table name"
+   change_intestation:
+    PC_name: PCname
+   forced_values:
+    author: "Castellani Davide"
+    module: eventsview
  product: 
-  validity: true
+  validity: false
   intestation: "PC_name,Caption,Description,IdentifyingNumber,InstallDate,InstallLocation,Language,Name,ProductID,URLInfoAbout,URLUpdateInfo,Vendor,Version,Date_local,Date_universal_microsecond"
+  db:
+   url: "your url"
+   token: "your token"
+   table: "table name"
+   change_intestation:
+    PC_name: PC_name
+   forced_values:
+    author: "Castellani Davide"
+    module: product

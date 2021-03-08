@@ -10,6 +10,7 @@ import requests
 import string
 from tabular_log import tabular_log
 from settings import settings
+from json import loads, dumps
 
 __author__ = "help@castellanidavide.it"
 __version__ = "01.03 2021-01-14"
@@ -27,6 +28,7 @@ class agent:
 		
 		# Prepare other files
 		if self.settings['folder'] == None : self.settings['folder'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "flussi")
+		print(self.settings['folder'])
 		self.csv_names = open(os.path.join(self.settings['folder'], "computers.csv"), "r+")
 		self.csv_agent_history = {}
 		self.csv_agent = {}
@@ -59,11 +61,36 @@ class agent:
 		self.log.print(f"End time")
 		self.log.print(f"Total time: {datetime.now() - self.start_time}")
 
-	def write_on_csv(self, part, data):
+	def write_data(self, part, data):
 		""" Write the same data into the two file of the istance
 		"""
 		self.csv_agent[part].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
 		self.csv_agent_history[part].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
+		
+		index = agent.csv2array(self.settings["parts"][part]["intestation"])[0]
+		infos = agent.csv2array(data)[0]
+
+		dict_values = {}
+		values_intestation = []
+		values = []
+
+		for key, value in self.settings["parts"][part]["db"]["change_intestation"].items():
+			dict_values[key] = infos[index.index(value)][1:-1]
+
+		for key, value in self.settings["parts"][part]["db"]["forced_values"].items():
+			dict_values[key] = value
+
+		for key, value in dict_values.items():
+			values_intestation.append(key)
+			values.append(value)
+
+		values_intestation = agent.array2csv([values_intestation,]).replace("\n", "").replace("\"", "")
+		values = agent.array2csv([values,]).replace("\n", "")
+		payload = dumps({"operation": "sql", "sql": f"INSERT INTO {self.settings['parts'][part]['db']['table']} ({values_intestation}) VALUES ({values})"}).replace("\\\"", "'")
+		print(payload)
+
+		response = requests.request("POST", self.settings["parts"][part]["db"]["url"], headers={'Content-Type': 'application/json','Authorization': f'''Basic {self.settings["parts"][part]["db"]["token"]}'''}, data=payload)
+		self.log.print(f"    - By DB: {response.text}")
 
 	def analyze_PC(self, PC_name):
 		"""Analyze the PC
@@ -73,26 +100,28 @@ class agent:
 		if self.settings["parts"]["osversion"]["validity"]:
 			self.log.print("  - Istruction: Win32_OperatingSystem")
 			for os_info in conn.Win32_OperatingSystem(["Caption", "Version"]):
-				self.write_on_csv("osversion", data=f"'{'My PC' if self.settings['debug'] else PC_name}','{os_info.Caption}','{os_info.Version}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n")
+				self.write_data("osversion", data=f"'{'My PC' if self.settings['debug'] else PC_name}','{os_info.Caption}','{os_info.Version}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n")
 		
 		if self.settings["parts"]["netinfo"]["validity"]:
 			self.log.print("  - Istruction: Win32_NetworkClient && Win32_NetworkProtocol")
 			for network_client, network_protocol, other in zip(conn.Win32_NetworkClient(["Caption", "Description", "Status", "Manufacturer", "Name"]), conn.Win32_NetworkProtocol(["GuaranteesDelivery", "GuaranteesSequencing", "MaximumAddressSize", "MaximumMessageSize", "SupportsConnectData", "SupportsEncryption", "SupportsEncryption", "SupportsGracefulClosing", "SupportsGuaranteedBandwidth", "SupportsQualityofService"]), conn.Win32_NetworkAdapterConfiguration(["DNSDomain", "DHCPEnabled", "DefaultIPGateway", "MACAddress"], IPEnabled=True)):
+				for i in range(len(other.DefaultIPGateway)): 
+					self.write_data("netinfo", data=f"""'{'My PC' if self.settings['debug'] else PC_name}','{network_client.Caption}','{network_client.Description}','{network_client.Status}','{network_client.Manufacturer}','{network_client.Name}','{network_protocol.GuaranteesDelivery}','{network_protocol.GuaranteesSequencing}','{network_protocol.MaximumAddressSize}','{network_protocol.MaximumMessageSize}','{network_protocol.SupportsConnectData}','{network_protocol.SupportsEncryption}','{network_protocol.SupportsGracefulClosing}','{network_protocol.SupportsGuaranteedBandwidth}','{network_protocol.SupportsQualityofService}','{other.DNSDomain}','{other.DHCPEnabled}','{"IPv4" if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else "IPv6"}','{other.DefaultIPGateway[i] if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else self.MACnormalization(other.DefaultIPGateway[i])}','{self.MACnormalization(other.MACAddress)}','{requests.get(f"http://macvendors.co/api/{other.MACAddress}").json()['result']['company']}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n""")
 				try:
 					for i in range(len(other.DefaultIPGateway)): 
-						self.write_on_csv("netinfo", data=f"""'{'My PC' if self.settings['debug'] else PC_name}','{network_client.Caption}','{network_client.Description}','{network_client.Status}','{network_client.Manufacturer}','{network_client.Name}','{network_protocol.GuaranteesDelivery}','{network_protocol.GuaranteesSequencing}','{network_protocol.MaximumAddressSize}','{network_protocol.MaximumMessageSize}','{network_protocol.SupportsConnectData}','{network_protocol.SupportsEncryption}','{network_protocol.SupportsGracefulClosing}','{network_protocol.SupportsGuaranteedBandwidth}','{network_protocol.SupportsQualityofService}','{other.DNSDomain}','{other.DHCPEnabled}','{"IPv4" if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else "IPv6"}','{other.DefaultIPGateway[i] if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else self.MACnormalization(other.DefaultIPGateway[i])}','{self.MACnormalization(other.MACAddress)}','{requests.get(f"http://macvendors.co/api/{other.MACAddress}").json()['result']['company']}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n""")
+						self.write_data("netinfo", data=f"""'{'My PC' if self.settings['debug'] else PC_name}','{network_client.Caption}','{network_client.Description}','{network_client.Status}','{network_client.Manufacturer}','{network_client.Name}','{network_protocol.GuaranteesDelivery}','{network_protocol.GuaranteesSequencing}','{network_protocol.MaximumAddressSize}','{network_protocol.MaximumMessageSize}','{network_protocol.SupportsConnectData}','{network_protocol.SupportsEncryption}','{network_protocol.SupportsGracefulClosing}','{network_protocol.SupportsGuaranteedBandwidth}','{network_protocol.SupportsQualityofService}','{other.DNSDomain}','{other.DHCPEnabled}','{"IPv4" if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else "IPv6"}','{other.DefaultIPGateway[i] if type(ip_address(other.DefaultIPGateway[i])) is IPv4Address else self.MACnormalization(other.DefaultIPGateway[i])}','{self.MACnormalization(other.MACAddress)}','{requests.get(f"http://macvendors.co/api/{other.MACAddress}").json()['result']['company']}','{datetime.now()}','{int(datetime.utcnow().timestamp() * 10 ** 6)}'\n""")
 				except:
 					pass
 		
 		if self.settings["parts"]["eventsview"]["validity"]:
 			self.log.print("  - Istruction: Win32_NTLogEvent")
 			for events_view in conn.Win32_NTLogEvent(['ComputerName ', 'User', 'Category', 'Type', 'CategoryString', 'EventCode', 'EventIdentifier', 'EventType', 'Logfile', 'RecordNumber'], type="Error"):
-				self.write_on_csv("eventsview", data=f"'{'My PC' if self.settings['debug'] else PC_name}','{events_view.User}','{events_view.Category}','{events_view.Type}','{events_view.CategoryString}','{events_view.EventCode}','{events_view.EventIdentifier}','{events_view.EventType}','{events_view.Logfile}','{events_view.RecordNumber}','{self.start_time}','{self.start_time.timestamp()}'\n")
+				self.write_data("eventsview", data=f"'{'My PC' if self.settings['debug'] else PC_name}','{events_view.User}','{events_view.Category}','{events_view.Type}','{events_view.CategoryString}','{events_view.EventCode}','{events_view.EventIdentifier}','{events_view.EventType}','{events_view.Logfile}','{events_view.RecordNumber}','{self.start_time}','{self.start_time.timestamp()}'\n")
 		
 		if self.settings["parts"]["product"]["validity"]:
 			self.log.print("  - Istruction: Win32_Product")
 			for product_infos in conn.Win32_Product(["Caption", "Description", "IdentifyingNumber", "InstallDate", "InstallLocation", "Language", "Name", "ProductID", "URLInfoAbout", "URLUpdateInfo", "Vendor", "Version"]):
-				self.write_on_csv("product", data=f"'{'My PC' if self.settings['debug'] else PC_name}','{product_infos.Caption}','{product_infos.Description}','{product_infos.IdentifyingNumber}','{product_infos.InstallDate}','{product_infos.InstallLocation}','{product_infos.Language}','{product_infos.Name}','{product_infos.ProductID}','{product_infos.URLInfoAbout}','{product_infos.URLUpdateInfo}','{product_infos.Vendor}','{product_infos.Version}','{self.start_time}','{self.start_time.timestamp()}'\n")
+				self.write_data("product", data=f"'{'My PC' if self.settings['debug'] else PC_name}','{product_infos.Caption}','{product_infos.Description}','{product_infos.IdentifyingNumber}','{product_infos.InstallDate}','{product_infos.InstallLocation}','{product_infos.Language}','{product_infos.Name}','{product_infos.ProductID}','{product_infos.URLInfoAbout}','{product_infos.URLUpdateInfo}','{product_infos.Vendor}','{product_infos.Version}','{self.start_time}','{self.start_time.timestamp()}'\n")
 
 	def core(self):
 		"""The core of the run
@@ -204,7 +233,7 @@ class agent:
 			if i % 2 == 0:
 				result += c
 			else:
-				result += c + self.settings["netinfo"]["MACsep"]
+				result += c + self.settings["parts"]["netinfo"]["MACsep"]
 
 		return result[:-1:]
 

@@ -2,30 +2,4 @@ flussi/eventsview*
 flussi/netinfo*
 flussi/osversion*
 flussi/product*
-
-Start
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=Start&ProcessID=17676&ThreadID=8560&MessageTime=1615140824.927357&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:44%202021
-Opened all files
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=Opened%20all%20files&ProcessID=17676&ThreadID=8560&MessageTime=1615140824.930785&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:44%202021
-Running: agent.py
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=Running:%20agent.py&ProcessID=17676&ThreadID=8560&MessageTime=1615140824.931781&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:44%202021
-- Inizialize files
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=-%20Inizialize%20files&ProcessID=17676&ThreadID=8560&MessageTime=1615140824.931781&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:44%202021
-- Inizialized csv_unchecked2
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=-%20Inizialized%20csv_unchecked2&ProcessID=17676&ThreadID=8560&MessageTime=1615140824.977481&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:44%202021
-- Inizialize osversion file
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=-%20Inizialize%20osversion%20file&ProcessID=17676&ThreadID=8560&MessageTime=1615140824.99368&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:44%202021
-- Inizialized osversion file
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=-%20Inizialized%20osversion%20file&ProcessID=17676&ThreadID=8560&MessageTime=1615140825.021393&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:45%202021
-- Run main part
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=-%20Run%20main%20part&ProcessID=17676&ThreadID=8560&MessageTime=1615140825.035388&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:45%202021
- - My PC, debug option
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=%20-%20My%20PC,%20debug%20option&ProcessID=17676&ThreadID=8560&MessageTime=1615140829.421148&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:49%202021
-  - Istructions: Win32_OperatingSystem
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=%20%20-%20Istructions:%20Win32_OperatingSystem&ProcessID=17676&ThreadID=8560&MessageTime=1615140829.42513&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:49%202021
-Unchecked PC updated
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=Unchecked%20PC%20upgraded&ProcessID=17676&ThreadID=8560&MessageTime=1615140829.588028&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:49%202021
-End time
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=End%20time&ProcessID=17676&ThreadID=8560&MessageTime=1615140829.603946&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:49%202021
-Total time: 0:00:04.687159
-https://www.castellanidavide.it/other/log.php?Title=agent&PCName=DAVIDECASTELLAN&ExecutionCode=1615140824&Message=Total%20time:%200:00:04.687159&ProcessID=17676&ThreadID=8560&MessageTime=1615140829.605939&MessageTimeForUsers=Sun%20Mar%20%207%2019:13:49%202021nCode=1615140304&Message=Total%20time:%200:00:04.771424&ProcessID=11536&ThreadID=704&MessageTime=1615140309.562238&MessageTimeForUsers=Sun%20Mar%20%207%2019:05:09%202021
+*.yaml
