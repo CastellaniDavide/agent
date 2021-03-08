@@ -29,7 +29,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Add auth
       run : |
-        sed -i 's/your url/${{ secrets.DB_URL }}/' ./settings/settings.yaml
+        sed -i 's/db url/${{ secrets.DB_URL }}/' ./settings/settings.yaml
         sed -i 's/your token/${{ secrets.DB_TOKEN }}/' ./settings/settings.yaml
         sed -i 's/table name/dev.trash/' ./settings/settings.yaml
         cat ./settings/settings.yaml
