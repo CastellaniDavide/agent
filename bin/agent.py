@@ -13,7 +13,7 @@ from settings import settings
 from json import loads, dumps
 
 __author__ = "help@castellanidavide.it"
-__version__ = "01.03 2021-01-14"
+__version__ = "02.01 2021-03-08"
 
 class agent:
 	def __init__ (self):
@@ -67,30 +67,33 @@ class agent:
 		self.csv_agent[part].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
 		self.csv_agent_history[part].write(f"""{agent.make_csv_standard(data).replace("'", '"')}""")
 		
-		index = agent.csv2array(self.settings["parts"][part]["intestation"])[0]
-		infos = agent.csv2array(data)[0]
+		if self.settings["parts"][part]["db"]["enabled"]:
+			index = agent.csv2array(self.settings["parts"][part]["intestation"])[0]
+			infos = agent.csv2array(data)[0]
 
-		dict_values = {}
-		values_intestation = []
-		values = []
+			dict_values = {}
+			values_intestation = []
+			values = []
 
-		for key, value in self.settings["parts"][part]["db"]["change_intestation"].items():
-			dict_values[key] = infos[index.index(value)][1:-1]
+			for key, value in self.settings["parts"][part]["db"]["change_intestation"].items():
+				dict_values[key] = infos[index.index(value)][1:-1]
 
-		for key, value in self.settings["parts"][part]["db"]["forced_values"].items():
-			dict_values[key] = value
+			for key, value in self.settings["parts"][part]["db"]["forced_values"].items():
+				dict_values[key] = value
 
-		for key, value in dict_values.items():
-			values_intestation.append(key)
-			values.append(value)
+			for key, value in dict_values.items():
+				values_intestation.append(key)
+				values.append(value)
 
-		values_intestation = agent.array2csv([values_intestation,]).replace("\n", "").replace("\"", "")
-		values = agent.array2csv([values,]).replace("\n", "")
-		payload = dumps({"operation": "sql", "sql": f"INSERT INTO {self.settings['parts'][part]['db']['table']} ({values_intestation}) VALUES ({values})"}).replace("\\\"", "'")
-		print(payload)
+			values_intestation = agent.array2csv([values_intestation,]).replace("\n", "").replace("\"", "")
+			values = agent.array2csv([values,]).replace("\n", "")
+			payload = dumps({"operation": "sql", "sql": f"INSERT INTO {self.settings['parts'][part]['db']['table']} ({values_intestation}) VALUES ({values})"}).replace("\\\"", "'")
 
-		response = requests.request("POST", self.settings["parts"][part]["db"]["url"], headers={'Content-Type': 'application/json','Authorization': f'''Basic {self.settings["parts"][part]["db"]["token"]}'''}, data=payload)
-		self.log.print(f"    - By DB: {response.text}")
+			try:
+				response = requests.request("POST", self.settings["parts"][part]["db"]["url"], headers={'Content-Type': 'application/json','Authorization': f'''Basic {self.settings["parts"][part]["db"]["token"]}'''}, data=payload)
+				self.log.print(f"    - By DB: {response.text}")
+			except:
+				self.log.print(f"    - Failed the DB insert")
 
 	def analyze_PC(self, PC_name):
 		"""Analyze the PC

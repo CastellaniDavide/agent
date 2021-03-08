@@ -31,7 +31,7 @@ jobs:
       run : |
         sed -i 's/harper db name/${{ secrets.DB_URL }}/' ./settings/settings.yaml
         sed -i 's/your token/${{ secrets.DB_TOKEN }}/' ./settings/settings.yaml
-        sed -i 's/table name/dev.trash/' ./settings/settings.yaml
+        sed -i 's/table name/${{ secrets.DB_TABLE }}/' ./settings/settings.yaml
         cat ./settings/settings.yaml
     - name: Test with pytest
       run: |

@@ -3,7 +3,7 @@
 from agent import *
 
 __author__ = "help@castellanidavide.it"
-__version__ = "01.01 2020-11-30"
+__version__ = "02.01 2021-03-08"
 
 def test():
 	"""Tests the agent function in the agent class

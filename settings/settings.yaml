@@ -1,15 +1,17 @@
 # Settings
 debug: true
-folder: null
+folder: null # The folder to save, to give default settings type null
 parts:
  osversion: 
   validity: true
   intestation: "PC_name,OS,OS_version,Date_local,Date_universal_microsecond"
   db:
+   enabled: true
    url: "https://harper db name.harperdbcloud.com"
    token: "your token"
    table: "table name"
    change_intestation:
+    # for_the_db: for_this_agent
     PC_name: PC_name
     OS: OS
     OS_version: OS_version
@@ -23,6 +25,7 @@ parts:
   intestation: "PCname,Caption,Description,Status,Manufacturer,Name,GuaranteesDelivery,GuaranteesSequencing,MaximumAddressSize,MaximumMessageSize,SupportsConnectData,SupportsEncryption,SupportsGracefulClosing,SupportsGuaranteedBandwidth,SupportsQualityofService,DNSDomain,DHCPEnabled,IP_Type,DefaultIPGateway,MACAddress,MACAdress_company,Date_local,Date_universal_microsecond"
   MACsep: "-"
   db:
+   enabled: true
    url: "https://harper db name.harperdbcloud.com"
    token: "your token"
    table: "table name"
@@ -57,6 +60,7 @@ parts:
   validity: true
   intestation: "PCname,User,Category,Type,CategoryString,EventCode,EventIdentifier,EventType,Logfile,RecordNumber,Date_local,Date_universal_microsecond"
   db:
+   enabled: true
    url: "https://harper db name.harperdbcloud.com"
    token: "your token"
    table: "table name"
@@ -80,6 +84,7 @@ parts:
   validity: true
   intestation: "PC_name,Caption,Description,IdentifyingNumber,InstallDate,InstallLocation,Language,Name,ProductID,URLInfoAbout,URLUpdateInfo,Vendor,Version,Date_local,Date_universal_microsecond"
   db:
+   enabled: true
    url: "https://harper db name.harperdbcloud.com"
    token: "your token"
    table: "table name"
